@@ -1,0 +1,38 @@
+[project]
+name = "ret-c2-080"
+version = "0.1.0"
+description = "RetailPOSTransactionAnomalyFraudDetectionAgent — AgentCore Template"
+requires-python = ">=3.11"
+# The framework package is provided by the build environment; it is
+# intentionally not pinned here.
+dependencies = [
+    "agenticstar-agentcore[marketplace,openai]==1.0.3",]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.0.3",
+    "pytest-cov==5.0.0",
+    "pytest-asyncio==1.4.0",
+    "ruff==0.4.4",
+    "mypy==1.10.0",
+]
+
+[build-system]
+requires = ["setuptools==68.2.2"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+# The framework wheel ships no py.typed, so mypy resolves AgentBaseGraph/FunctionNode to
+# Any. State that once here rather than scattering ignores on every node class.
+disallow_subclassing_any = false
+
+[[tool.mypy.overrides]]
+# Dependencies without type information. Remove and re-measure once the wheel ships py.typed.
+module = ["framework.*", "shared.*", "langgraph.*", "langchain_core.*"]
+ignore_missing_imports = true

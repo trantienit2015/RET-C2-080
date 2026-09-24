@@ -1,0 +1,19 @@
+# Agent Manifest - AgentRegistry static entry point.
+# Root-level keys only; `class` is a single dotted import path.
+# Runtime-tunable parameters live in config/config.yaml, not here.
+
+id: RET-C2-080
+name: RetailPOSTransactionAnomalyFraudDetectionAgent
+namespace: ret
+version: 0.1.0
+enabled: true
+description: RetailPOSTransactionAnomalyFraudDetectionAgent
+class: src.graph.graph.POSTransactionAnomalyGraph
+category: Cat 2
+industry: RET
+base_type: DocGenerationAgent
+generation_mode: deterministic
+required_trust_level: VERIFIED_EXTERNAL
+requires:
+  secrets: []
+  extras: []
